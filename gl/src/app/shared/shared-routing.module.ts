@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path :'header', component : HeaderComponent},
+  { path :'footer', component : FooterComponent},
+  { path :'hero', component : HeroBannerComponent},
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
