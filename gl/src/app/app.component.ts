@@ -15,12 +15,12 @@ constructor(public router: Router) {}
   shouldShowHeader(): boolean {
     const url = this.router.url;
     // Hide header ONLY on 404 page
-    return url !== '/404';
+    return url !== '/shared/404';
   }
 
   shouldShowFooter(): boolean {
     const url = this.router.url;
     // Hide footer ONLY on 404 page
-    return url !== '/404';
+    return url !== '/shared/404';
   }
 }
