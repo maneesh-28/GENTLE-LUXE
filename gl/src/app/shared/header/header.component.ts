@@ -8,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  searchQuery: string = '';
+
+onSearch() {
+  console.log('Searching for:', this.searchQuery);
+  // Navigate or filter based on this.searchQuery
+}
+
 }

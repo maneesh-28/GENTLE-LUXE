@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-hero-banner',
   standalone: false,
@@ -7,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './hero-banner.component.css'
 })
 export class HeroBannerComponent {
-
 }
