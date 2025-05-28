@@ -3,11 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path :'header', component : HeaderComponent},
   { path :'footer', component : FooterComponent},
   { path :'hero', component : HeroBannerComponent},
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '404' },
 
 ];
 

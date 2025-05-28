@@ -1,1 +1,77 @@
-<p>home works!</p>
+<app-hero-banner></app-hero-banner>
+
+<div class="bg-kabul text-white px-6 py-12 space-y-16">
+  <!-- Featured Collection -->
+  <section class="text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold uppercase tracking-wide mb-4">Featured Collection</h2>
+    <!-- Add product cards or carousel here -->
+     <div class="flex overflow-x-auto gap-6 py-4 px-2">
+  <div *ngFor="let product of featuredcollection" class="min-w-[250px] bg-white rounded-2xl shadow-md">
+    <img [src]="product.image" [alt]="product.name" class="rounded-t-2xl h-60 w-full object-cover">
+    <div class="p-4">
+      <h3 class="font-semibold text-lg text-kabul">{{ product.name }}</h3>
+      <p class="text-stone-500 text-sm">{{ product.description }}</p>
+      <p class="text-zeus font-bold mt-2">${{ product.price }}</p>
+    </div>
+  </div>
+</div>
+
+    <p class="text-stone-300 text-sm">Handpicked highlights of the season.</p>
+  </section>
+
+  <!-- Best Seller -->
+  <section class="text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold uppercase tracking-wide mb-4">Best Seller</h2>
+    <!-- Add product showcase or grid here -->
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-4">
+  <div *ngFor="let product of products" class="bg-white rounded-2xl shadow-md">
+    <img [src]="product.image" [alt]="product.name" class="rounded-t-2xl h-60 w-full object-cover" />
+    <div class="p-4">
+      <h3 class="font-semibold text-lg text-kabul">{{ product.name }}</h3>
+      <p class="text-stone-500 text-sm">{{ product.description }}</p>
+      <p class="text-zeus font-bold mt-2">${{ product.price }}</p>
+    </div>
+  </div>
+</div>
+    <p class="text-stone-300 text-sm">Our most-loved pieces by customers.</p>
+  </section>
+
+  <!-- New Arrivals -->
+  <section class="text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold uppercase tracking-wide mb-4">New Arrivals</h2>
+    <!-- Add new product grid or slider here -->
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-4">
+  <div *ngFor="let product of newArrivals" class="bg-white rounded-2xl shadow-md">
+    <img [src]="product.image" [alt]="product.name" class="rounded-t-2xl h-60 w-full object-cover">
+    <div class="p-4">
+      <h3 class="font-semibold text-lg text-kabul">{{ product.name }}</h3>
+      <p class="text-stone-500 text-sm">{{ product.description }}</p>
+      <p class="text-zeus font-bold mt-2">${{ product.price }}</p>
+    </div>
+  </div>
+</div>
+
+    <p class="text-stone-300 text-sm">Fresh drops you don’t want to miss.</p>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="bg-zeus rounded-2xl p-8 text-center max-w-4xl mx-auto shadow-md">
+    <h1 class="text-white text-2xl sm:text-3xl md:text-4xl font-semibold mb-4">
+      Join our Style Circle
+    </h1>
+    <p class="text-stone-300 mb-6">Get exclusive drops, deals, and style updates directly in your inbox.</p>
+    <form class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        class="px-4 py-2 rounded-md text-kabul placeholder-kabul w-full sm:w-72 focus:outline-none"
+      />
+      <button
+        type="submit"
+        class="bg-cloud text-kabul px-6 py-2 rounded-md font-semibold uppercase tracking-wide hover:bg-opacity-90 transition"
+      >
+        Subscribe
+      </button>
+    </form>
+  </section>
+</div>

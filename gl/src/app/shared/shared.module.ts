@@ -6,18 +6,25 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    HeroBannerComponent
+    HeroBannerComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     FormsModule
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    HeroBannerComponent
   ]
 })
 export class SharedModule { }

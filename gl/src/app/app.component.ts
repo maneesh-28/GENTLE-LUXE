@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,19 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent{
   title = 'gl';
+constructor(public router: Router) {}
+
+  shouldShowHeader(): boolean {
+    const url = this.router.url;
+    // Hide header ONLY on 404 page
+    return url !== '/404';
+  }
+
+  shouldShowFooter(): boolean {
+    const url = this.router.url;
+    // Hide footer ONLY on 404 page
+    return url !== '/404';
+  }
 }
