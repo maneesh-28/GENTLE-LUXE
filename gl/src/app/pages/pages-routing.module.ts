@@ -16,7 +16,8 @@ const routes: Routes = [
   { path :'shop', component : ShopComponent},
   { path :'product-details', component : ProductDetailsComponent},
   { path :'contact', component : ContactComponent},
-
+  { path :'order-confirmation', component : OrderconfirmationComponent }
+  { path :'my-orders', component : My },
 ];
 
 @NgModule({

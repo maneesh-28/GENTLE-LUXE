@@ -11,6 +11,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { MyOrderComponent } from './my-order/my-order.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { FormsModule } from '@angular/forms';
     CartComponent,
     AboutusComponent,
     CheckoutComponent,
-    ContactComponent
+    ContactComponent,
+    OrderConfirmationComponent,
+    MyOrderComponent
   ],
   imports: [
     CommonModule,
