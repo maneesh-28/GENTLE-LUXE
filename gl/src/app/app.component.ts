@@ -18,9 +18,29 @@ constructor(public router: Router) {}
     return url !== '/shared/404';
   }
 
-  shouldShowFooter(): boolean {
-    const url = this.router.url;
+  // shouldShowFooter(): boolean {
+    // const url = this.router.url;
     // Hide footer ONLY 
-    return url !== '/shared/404' && url !== '/pages/cart' && url !== '/pages/checkout';
-  }
+    // return url !== '/shared/404' && url !=='/pages';
+  // }
+
+  shouldShowFooter(): boolean {
+  const url = this.router.url;
+
+  // Routes where footer should be hidden
+  const hiddenRoutes = [
+    '/shared/404',
+    '/pages/cart',
+    '/pages/checkout',
+    '/pages/my-orders',
+    '/pages/order-confirmation'
+  ];
+
+  // Hide for dynamic product details route like /pages/product-details/42
+  const isProductDetails = url.startsWith('/pages/product-details/');
+
+  return !hiddenRoutes.includes(url) && !isProductDetails;
 }
+
+}
+

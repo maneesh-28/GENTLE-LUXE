@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+
 products = [
     {
       name: 'Linen Summer Shirt',
@@ -72,6 +73,7 @@ products = [
     }
   ];
 }
+
 
 
 

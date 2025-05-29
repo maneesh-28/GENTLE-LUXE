@@ -17,9 +17,9 @@ const routes: Routes = [
     { path: 'pages', 
       loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
      },
-    // { path: 'shared', 
-    //   loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule)
-    //  },
+    { path: 'components', 
+      loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule)
+     },
 ];
 
 @NgModule({
