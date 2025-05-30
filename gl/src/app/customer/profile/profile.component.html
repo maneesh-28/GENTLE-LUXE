@@ -1,0 +1,135 @@
+<div class="max-w-4xl mx-auto px-4 py-8" style="padding-top: 100px;">
+  <!-- Profile Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold">My Profile</h2>
+    <button
+      class="bg-kabul text-cloud px-4 py-2 rounded-md hover:bg-shadow transition"
+      (click)="editMode = !editMode"
+    >
+      {{ editMode ? 'Cancel' : 'Edit Profile' }}
+    </button>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="bg-white rounded-xl shadow p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Profile Picture -->
+    <div class="flex flex-col items-center">
+      <img
+        [src]="editMode ? previewUrl || customer.profilePicture : customer.profilePicture"
+        alt="Profile Picture"
+        class="w-32 h-32 rounded-full object-cover mb-4 border-2 border-kabul"
+      />
+      <div *ngIf="editMode" class="w-full text-center">
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-kabul file:text-white hover:file:bg-shadow"
+        />
+      </div>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="md:col-span-2 space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Full Name</label>
+          <input
+            type="text"
+            [readonly]="!editMode"
+            [(ngModel)]="customer.fullName"
+            class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-kabul focus:border-kabul"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Email</label>
+          <input
+            type="email"
+            [readonly]="true"
+            [value]="customer.email"
+            class="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md px-3 py-2"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Phone Number</label>
+          <input
+            type="tel"
+            [readonly]="!editMode"
+            [(ngModel)]="customer.phone"
+            class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-kabul focus:border-kabul"
+          />
+        </div>
+        <div *ngIf="editMode">
+          <label class="block text-sm font-medium text-gray-600">Password</label>
+          <input
+            type="password"
+            [(ngModel)]="customer.password"
+            placeholder="Update Password"
+            class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-kabul focus:border-kabul"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Address</label>
+        <textarea
+          [readonly]="!editMode"
+          [(ngModel)]="customer.address"
+          rows="2"
+          class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-kabul focus:border-kabul"
+        ></textarea>
+      </div>
+
+      <div *ngIf="editMode">
+        <button
+          (click)="saveProfile()"
+          class="mt-4 bg-kabul text-cloud px-4 py-2 rounded-md hover:bg-shadow transition"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
+    <button
+      routerLink="/customer/orders"
+      class="bg-white border border-kabul text-kabul py-3 rounded-lg font-medium hover:bg-kabul hover:text-cloud transition"
+    >
+      My Orders
+    </button>
+
+    <button
+      routerLink="/customer/address-book"
+      class="bg-white border border-kabul text-kabul py-3 rounded-lg font-medium hover:bg-kabul hover:text-cloud transition"
+    >
+      Address Book
+    </button>
+
+    <a
+      href="https://www.google.com/maps"
+      target="_blank"
+      class="bg-white border border-kabul text-kabul py-3 rounded-lg font-medium hover:bg-kabul hover:text-cloud transition"
+    >
+      Google Map
+    </a>
+
+    <button
+      routerLink="/customer/wishlist"
+      class="bg-white border border-kabul text-kabul py-3 rounded-lg font-medium hover:bg-kabul hover:text-cloud transition"
+    >
+      Wishlist
+    </button>
+
+    <button
+      (click)="logout()"
+      class="bg-red-500 text-white py-3 rounded-lg font-medium hover:bg-red-600 transition col-span-full"
+    >
+      Logout
+    </button>
+  </div>
+</div>

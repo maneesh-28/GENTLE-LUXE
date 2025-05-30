@@ -1,0 +1,113 @@
+<div class="max-w-md mx-auto p-6 mt-10 bg-white rounded-lg shadow-lg font-bicubik text-zeus">
+
+  <!-- Step 1 -->
+  <div *ngIf="step === 1" class="space-y-6">
+    <h3 class="text-2xl font-semibold mb-4">Step 1: Enter Mobile Number</h3>
+    <input
+      type="tel"
+      placeholder="Mobile Number"
+      formControlName="mobile"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <button
+      (click)="nextStep()"
+      class="w-full bg-kabul text-cloud py-3 rounded-md font-semibold hover:bg-shadow transition"
+    >
+      Send OTP
+    </button>
+  </div>
+
+  <!-- Step 2 -->
+  <div *ngIf="step === 2" class="space-y-6">
+    <h3 class="text-2xl font-semibold mb-4">Step 2: Enter OTP</h3>
+    <input
+      type="text"
+      placeholder="Enter OTP"
+      formControlName="otp"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <div class="flex justify-between">
+      <button
+        (click)="previousStep()"
+        class="px-6 py-3 border border-kabul text-kabul rounded-md font-semibold hover:bg-cloud transition"
+      >
+        Back
+      </button>
+      <button
+        (click)="nextStep()"
+        class="px-6 py-3 bg-kabul text-cloud rounded-md font-semibold hover:bg-shadow transition"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div *ngIf="step === 3" class="space-y-6">
+    <h3 class="text-2xl font-semibold mb-4">Step 3: Your Information</h3>
+    <input
+      type="text"
+      placeholder="Full Name"
+      formControlName="name"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <input
+      type="email"
+      placeholder="Email (Optional)"
+      formControlName="email"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <div class="flex justify-between">
+      <button
+        (click)="previousStep()"
+        class="px-6 py-3 border border-kabul text-kabul rounded-md font-semibold hover:bg-cloud transition"
+      >
+        Back
+      </button>
+      <button
+        (click)="nextStep()"
+        class="px-6 py-3 bg-kabul text-cloud rounded-md font-semibold hover:bg-shadow transition"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div *ngIf="step === 4" class="space-y-6">
+    <h3 class="text-2xl font-semibold mb-4">Step 4: Create Account</h3>
+    <input
+      type="text"
+      placeholder="Choose Username"
+      formControlName="username"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <input
+      type="password"
+      placeholder="Confirm Password"
+      formControlName="confirmPassword"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <div class="flex justify-between">
+      <button
+        (click)="previousStep()"
+        class="px-6 py-3 border border-kabul text-kabul rounded-md font-semibold hover:bg-cloud transition"
+      >
+        Back
+      </button>
+      <button
+        (click)="submitSignup()"
+        class="px-6 py-3 bg-kabul text-cloud rounded-md font-semibold hover:bg-shadow transition"
+      >
+        Sign Up
+      </button>
+    </div>
+  </div>
+  
+</div>

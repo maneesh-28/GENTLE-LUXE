@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  activeTab: string = 'overview';
+
+  setTab(tab: string) {
+    this.activeTab = tab;
+  }
 }

@@ -1,0 +1,136 @@
+<div
+  class="max-w-md mx-auto p-6 mt-10 bg-white rounded-lg shadow-lg font-bicubik text-zeus"
+>
+  <h2 class="text-3xl font-semibold mb-8 text-center">
+    {{ forgotPasswordMode ? 'Forgot Password' : 'Login' }}
+  </h2>
+
+  <!-- Login Form -->
+  <form
+    *ngIf="!forgotPasswordMode"
+    [formGroup]="loginForm"
+    class="space-y-6"
+    (ngSubmit)="onLogin()"
+  >
+    <input
+      type="text"
+      placeholder="Username or Phone"
+      formControlName="identifier"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <button
+      type="submit"
+      class="w-full bg-kabul text-cloud py-3 rounded-md font-semibold hover:bg-shadow transition"
+    >
+      Login
+    </button>
+
+    <p class="text-center text-sm text-shadow mt-2">
+      <a
+        href="#"
+        class="text-kabul hover:underline"
+        (click)="forgotPasswordMode = true; step = 1"
+        >Forgot Password?</a
+      >
+      |
+      <a href="#" class="text-kabul hover:underline" (click)="goToRegister()"
+        >Register Account</a
+      >
+    </p>
+  </form>
+
+  <!-- Forgot Password Workflow -->
+  <form
+  *ngIf="forgotPasswordMode"
+  [formGroup]="loginForm"
+  class="space-y-6"
+  (ngSubmit)="
+    step === 1 ? sendOtp() : step === 2 ? verifyOtp() : resetPassword()
+  "
+>
+  <!-- Step 1: Enter phone -->
+  <div *ngIf="step === 1">
+    <input
+      type="tel"
+      placeholder="Phone Number"
+      formControlName="phone"
+      class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+    />
+    <button
+      type="submit"
+      class="w-full bg-kabul text-cloud py-3 rounded-md font-semibold hover:bg-shadow transition"
+    >
+      Send OTP
+    </button>
+    <button
+      type="button"
+      (click)="forgotPasswordMode = false"
+      class="w-full mt-2 border border-kabul text-kabul rounded-md py-3 font-semibold hover:bg-cloud transition"
+    >
+      Back to Login
+    </button>
+  </div>
+
+    <!-- Step 2: Enter OTP -->
+    <div *ngIf="step === 2">
+      <input
+        type="text"
+        placeholder="Enter OTP"
+        formControlName="otp"
+        class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+      />
+      <div class="flex justify-between">
+        <button
+          type="button"
+          (click)="step = 1"
+          class="px-6 py-3 border border-kabul text-kabul rounded-md font-semibold hover:bg-cloud transition"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          class="px-6 py-3 bg-kabul text-cloud rounded-md font-semibold hover:bg-shadow transition"
+        >
+          Verify OTP
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: New password -->
+    <div *ngIf="step === 3">
+      <input
+        type="password"
+        placeholder="New Password"
+        formControlName="newPassword"
+        class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+      />
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+        class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+      />
+      <div class="flex justify-between">
+        <button
+          type="button"
+          (click)="step = 2"
+          class="px-6 py-3 border border-kabul text-kabul rounded-md font-semibold hover:bg-cloud transition"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          class="px-6 py-3 bg-kabul text-cloud rounded-md font-semibold hover:bg-shadow transition"
+        >
+          Update Password
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

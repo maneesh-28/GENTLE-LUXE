@@ -1,0 +1,37 @@
+<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-10 p-6" style="padding-top: 100px;">
+  <h2 class="text-xl font-semibold mb-4">Confirm Order</h2>
+  
+  <div class="flex space-x-4">
+    <img
+      [src]="order.imageUrl"
+      alt="{{ order.productName }}"
+      class="w-32 h-32 object-cover rounded-lg shadow"
+    />
+    
+    <div class="flex-1">
+      <p><span class="font-semibold">Customer ID:</span> {{ order.customerId }}</p>
+      <p><span class="font-semibold">Customer Name:</span> {{ order.customerName }}</p>
+      <p><span class="font-semibold">Product ID:</span> {{ order.productId }}</p>
+      <p><span class="font-semibold">Product Name:</span> {{ order.productName }}</p>
+      <p><span class="font-semibold">Order Date:</span> {{ order.orderDate }}</p>
+      <p><span class="font-semibold">Price:</span> ₹{{ order.price }}</p>
+      <p><span class="font-semibold">Size:</span> {{ order.size }}</p>
+      <p><span class="font-semibold">Color:</span> {{ order.color }}</p>
+    </div>
+  </div>
+
+  <div class="mt-6 flex justify-end space-x-4">
+    <button
+      (click)="cancelOrder()"
+      class="px-5 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+    >
+      Cancel
+    </button>
+    <button
+      (click)="confirmOrder()"
+      class="px-5 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition"
+    >
+      Confirm
+    </button>
+  </div>
+</div>

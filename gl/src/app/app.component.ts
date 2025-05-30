@@ -12,23 +12,26 @@ export class AppComponent{
   title = 'gl';
 constructor(public router: Router) {}
 
-  shouldShowHeader(): boolean {
-    const url = this.router.url;
-    // Hide header ONLY 
-    return url !== '/shared/404';
-  }
+ shouldShowHeader(): boolean {
+  const url = this.router.url;
 
-  // shouldShowFooter(): boolean {
-    // const url = this.router.url;
-    // Hide footer ONLY 
-    // return url !== '/shared/404' && url !=='/pages';
-  // }
+  const hiddenRoutes = [
+    '/auth/login',
+    '/auth/register',
+    '/auth/adminlogin',
+    '/shared/404'
+  ];
+
+  return !hiddenRoutes.includes(url);
+}
 
   shouldShowFooter(): boolean {
   const url = this.router.url;
 
-  // Routes where footer should be hidden
   const hiddenRoutes = [
+    '/auth/login',
+    '/auth/register',
+    '/auth/adminlogin',
     '/shared/404',
     '/pages/cart',
     '/pages/checkout',
@@ -36,7 +39,6 @@ constructor(public router: Router) {}
     '/pages/order-confirmation'
   ];
 
-  // Hide for dynamic product details route like /pages/product-details/42
   const isProductDetails = url.startsWith('/pages/product-details/');
 
   return !hiddenRoutes.includes(url) && !isProductDetails;
