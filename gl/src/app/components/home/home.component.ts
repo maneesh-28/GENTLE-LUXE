@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
+
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 @Component({
   selector: 'app-home',
@@ -6,8 +12,41 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
+  constructor(private el: ElementRef) {}
 
+   ngAfterViewInit(): void {
+    // Animate main sections on scroll (down and reverse up)
+    gsap.utils.toArray('.reveal').forEach((section: any) => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: 'power2.out',
+      });
+    });
+
+    // Animate product cards with staggered delay
+    gsap.utils.toArray('.product-card').forEach((card: any, index: number) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        delay: index * 0.05,
+        ease: 'power2.out',
+      });
+    });
+  }
 
 products = [
     {

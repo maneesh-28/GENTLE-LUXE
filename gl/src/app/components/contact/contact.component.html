@@ -1,1 +1,54 @@
-<p>contact works!</p>
+<section class="min-h-screen bg-cloud font-bicubik text-zeus px-4 py-10 md:py-20" style="padding-top: 100px;">
+  <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden grid md:grid-cols-2">
+    <!-- Contact Info -->
+    <div class="bg-kabul text-cloud p-8 flex flex-col justify-between">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-semibold mb-4">Get in Touch</h2>
+        <p class="text-lightbrown mb-8">We'd love to hear from you. Fill out the form and we'll get back shortly.</p>
+      </div>
+      <div class="space-y-4 mt-auto">
+        <p class="text-shadow">Email: contact&#64;gentleluxe.com</p>
+        <p class="text-shadow">Phone: +1 (234) 567-890</p>
+        <div class="flex space-x-4 pt-4">
+          <a href="#" class="text-cloud hover:text-shadow transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 5.924c-.793.352-1.644.59-2.533.696a4.462 4.462 0 0 0 1.96-2.465 8.993 8.993 0 0 1-2.829 1.08A4.482 4.482 0 0 0 16.433 4c-2.485 0-4.5 2.014-4.5 4.5 0 .35.04.694.117 1.022-3.742-.188-7.061-1.98-9.284-4.704a4.48 4.48 0 0 0-.609 2.263c0 1.561.795 2.939 2.003 3.744a4.473 4.473 0 0 1-2.036-.562v.056c0 2.18 1.552 4.001 3.612 4.418a4.505 4.505 0 0 1-2.03.078c.571 1.78 2.225 3.076 4.187 3.112a8.993 8.993 0 0 1-5.57 1.922c-.362 0-.719-.021-1.071-.062a12.714 12.714 0 0 0 6.88 2.016c8.256 0 12.774-6.838 12.774-12.774 0-.195-.005-.389-.014-.582A9.142 9.142 0 0 0 22 5.924z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-cloud hover:text-shadow transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.406.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.462.099 2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.312h3.591l-.467 3.622h-3.124V24h6.127C23.406 24 24 23.406 24 22.674V1.326C24 .593 23.406 0 22.675 0z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-cloud hover:text-shadow transition">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c-5.422 0-9.837 4.415-9.837 9.837 0 4.892 3.595 8.946 8.304 9.738v-6.887h-2.5v-2.851h2.5v-2.172c0-2.471 1.493-3.834 3.77-3.834 1.093 0 2.236.196 2.236.196v2.457h-1.26c-1.242 0-1.627.771-1.627 1.562v1.791h2.773l-.443 2.851h-2.33v6.887c4.709-.792 8.304-4.846 8.304-9.738 0-5.422-4.415-9.837-9.837-9.837z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form class="p-8 bg-cloud space-y-6 flex flex-col justify-center">
+      <div>
+        <label class="block mb-1 text-sm text-shadow" for="name">Name</label>
+        <input id="name" type="text" placeholder="Your Name"
+          class="w-full border border-shadow rounded-xl px-4 py-2 bg-white text-zeus placeholder-shadow focus:outline-none focus:ring-2 focus:ring-lightbrown">
+      </div>
+      <div>
+        <label class="block mb-1 text-sm text-shadow" for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com"
+          class="w-full border border-shadow rounded-xl px-4 py-2 bg-white text-zeus placeholder-shadow focus:outline-none focus:ring-2 focus:ring-lightbrown">
+      </div>
+      <div>
+        <label class="block mb-1 text-sm text-shadow" for="message">Message</label>
+        <textarea id="message" rows="4" placeholder="Your message..."
+          class="w-full border border-shadow rounded-xl px-4 py-2 bg-white text-zeus placeholder-shadow focus:outline-none focus:ring-2 focus:ring-lightbrown"></textarea>
+      </div>
+      <button type="submit"
+        class="bg-kabul text-cloud px-6 py-3 rounded-xl hover:bg-shadow transition text-center font-semibold">Send
+        Message</button>
+    </form>
+  </div>
+</section>

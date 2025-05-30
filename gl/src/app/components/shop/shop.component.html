@@ -1,1 +1,93 @@
-<p>shop works!</p>
+<div class="font-bicubik bg-cloud min-h-screen p-4 md:p-10 text-zeus" style="padding-top: 100px;">
+  <div class="max-w-7xl mx-auto flex flex-col gap-8">
+
+    <!-- Search + Filter Toggle -->
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+      <!-- Search Bar -->
+      <div class="flex-1 relative">
+        <input
+          type="search"
+          placeholder="Search dresses..."
+          [(ngModel)]="searchTerm"
+          class="w-full px-4 py-2 md:py-3 rounded-lg border border-shadow placeholder-kabul text-zeus focus:outline-none focus:ring-2 focus:ring-kabul text-sm md:text-base"
+        />
+        <!-- Optional dropdown example -->
+        <div *ngIf="searchTerm.length > 1" class="absolute z-10 left-0 right-0 bg-white border mt-1 rounded-lg shadow-md text-sm">
+          <div class="px-4 py-2 text-kabul">Suggestions for "{{ searchTerm }}"</div>
+        </div>
+      </div>
+
+      <!-- Filter Button -->
+      <div class="md:w-auto flex justify-end items-center">
+        <button (click)="showFilters = !showFilters" aria-label="Toggle Filters"
+          class="p-2 border rounded-lg hover:bg-shadow transition transform duration-300 hover:scale-105">
+          <!-- Filter SVG Icon -->
+          <svg class="w-6 h-6 text-zeus" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-3.586L3.293 6.707A1 1 0 013 6V4z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filters Panel -->
+    <div *ngIf="showFilters" class="flex flex-col gap-4 md:absolute md:right-10 md:top-[160px] md:w-72 bg-cloud border border-shadow p-4 rounded-xl shadow-lg animate-slide-in">
+      <!-- Category Filter -->
+      <label class="block font-semibold mb-1" for="categoryFilter">Category</label>
+      <select id="categoryFilter" [(ngModel)]="filters.category"
+        class="w-full px-4 py-2 rounded-lg border border-shadow bg-cloud text-zeus focus:outline-none focus:ring-2 focus:ring-kabul">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+
+      <!-- Size Filter -->
+      <label class="block font-semibold mb-1" for="sizeFilter">Size</label>
+      <select id="sizeFilter" [(ngModel)]="filters.size"
+        class="w-full px-4 py-2 rounded-lg border border-shadow bg-cloud text-zeus focus:outline-none focus:ring-2 focus:ring-kabul">
+        <option value="">All Sizes</option>
+        <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+      </select>
+
+      <!-- Price Range Filter -->
+      <label class="block font-semibold mb-1" for="priceFilter">Price Range</label>
+      <select id="priceFilter" [(ngModel)]="filters.priceRange"
+        class="w-full px-4 py-2 rounded-lg border border-shadow bg-cloud text-zeus focus:outline-none focus:ring-2 focus:ring-kabul">
+        <option value="">All Prices</option>
+        <option value="0-1000">₹0 - ₹1000</option>
+        <option value="1001-3000">₹1001 - ₹3000</option>
+        <option value="3001-5000">₹3001 - ₹5000</option>
+        <option value="5000+">₹5000+</option>
+      </select>
+
+      <!-- Sort Filter -->
+      <label class="block font-semibold mb-1" for="sortFilter">Sort By</label>
+      <select id="sortFilter" [(ngModel)]="sortBy"
+        class="w-full px-4 py-2 rounded-lg border border-shadow bg-cloud text-zeus focus:outline-none focus:ring-2 focus:ring-kabul">
+        <option value="newest">Newest</option>
+        <option value="priceLowHigh">Price: Low to High</option>
+        <option value="priceHighLow">Price: High to Low</option>
+        <option value="mostPopular">Most Popular</option>
+      </select>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div *ngFor="let product of filteredProducts()"
+        class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer flex flex-col">
+        <img [src]="product.image" alt="{{product.title}}" class="w-full aspect-[4/5] object-cover">
+        <div class="p-4 flex flex-col flex-grow">
+          <h3 class="text-lg font-semibold mb-1 text-zeus">{{ product.title }}</h3>
+          <p class="text-kabul text-sm mb-3 flex-grow">{{ product.shortDescription }}</p>
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-zeus">₹{{ product.price }}</span>
+            <button (click)="addToCart(product)"
+              class="bg-zeus text-cloud px-3 py-1 rounded-lg text-sm hover:bg-shadow transition">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
