@@ -111,3 +111,4 @@
 .search-bar input:valid + .search-btn:active {
   transform: translateY(1px);
 }
+

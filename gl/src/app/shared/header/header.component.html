@@ -1,9 +1,10 @@
-<header class="bg-zeus font-bicubik text-stone-200 p-4 fixed top-0 left-0 w-full z-50">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    
+<header class="bg-zeus font-bicubik text-stone-200 fixed top-0 left-0 w-full z-50 shadow-md">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
+
     <!-- Brand -->
     <div class="flex items-center space-x-2">
-      <h3 class="uppercase text-3xl font-semibold tracking-wide">gentle luxe</h3>
+      <!-- <img src="/assets/logo/gl-logo.png" alt="logo" class="h-10 w-auto object-contain" /> -->
+      <h3 class="uppercase text-2xl md:text-3xl font-semibold tracking-wide">gentle luxe</h3>
     </div>
 
     <!-- Search Bar (desktop only) -->
@@ -19,7 +20,7 @@
         title="Search"
         class="bg-cloud hover:bg-opacity-90 text-kabul p-2 rounded-r-md flex items-center justify-center"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
         </svg>
       </button>
@@ -31,26 +32,27 @@
       <a href="#" class="hover:text-cloud">Shop</a>
     </nav>
 
-    <!-- Profile / Cart (always visible) -->
+    <!-- Profile / Cart (desktop only) -->
     <div class="hidden md:flex items-center space-x-4">
-      <button class="hover:text-cloud" title="Profile">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <button class="hover:text-cloud" title="Profile" aria-label="Profile">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
       </button>
-      <button class="hover:text-cloud" title="Cart">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <button class="hover:text-cloud" title="Cart" aria-label="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
         </svg>
       </button>
     </div>
 
     <!-- Hamburger Menu Button (mobile only) -->
-    <button
-      class="md:hidden ml-auto text-stone-200 hover:text-cloud"
-      (click)="isMobileMenuOpen = !isMobileMenuOpen"
-      aria-label="Toggle menu"
-    >
+  <button
+  class="md:hidden ml-auto text-stone-200 hover:text-cloud"
+  (click)="isMobileMenuOpen = !isMobileMenuOpen"
+  aria-label="Toggle menu"
+  [attr.aria-expanded]="isMobileMenuOpen"
+>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
            stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
         <path stroke-linecap="round" stroke-linejoin="round" 
@@ -60,42 +62,41 @@
   </div>
 
   <!-- Mobile Menu -->
- <nav *ngIf="isMobileMenuOpen" class="md:hidden bg-zeus text-stone-200 p-4 uppercase font-medium space-y-4">
-  <a href="#" class="block hover:text-cloud">Home</a>
-  <a href="#" class="block hover:text-cloud">Shop</a>
+  <nav *ngIf="isMobileMenuOpen" class="md:hidden bg-zeus text-stone-200 p-4 uppercase font-medium space-y-4 fixed top-[56px] left-0 w-full z-40 shadow-lg max-h-[calc(100vh-56px)] overflow-auto">
+    <a href="#" class="block hover:text-cloud">Home</a>
+    <a href="#" class="block hover:text-cloud">Shop</a>
 
-  <!-- Profile / Cart (mobile visible) -->
-  <div class="flex items-center space-x-4">
-    <button class="hover:text-cloud" title="Profile">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-      </svg>
-    </button>
-    <button class="hover:text-cloud" title="Cart">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-      </svg>
-    </button>
-  </div>
+    <!-- Profile / Cart (mobile visible) -->
+    <div class="flex items-center space-x-4 mt-4">
+      <button class="hover:text-cloud" title="Profile" aria-label="Profile">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      </button>
+      <button class="hover:text-cloud" title="Cart" aria-label="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+        </svg>
+      </button>
+    </div>
 
-  <!-- Search Bar (mobile visible) -->
-  <div class="flex items-center space-x-2 mx-0 mt-4 w-full">
-    <input 
-      type="text" 
-      [(ngModel)]="searchQuery"
-      placeholder="Search..." 
-      class="flex-grow px-3 py-1.5 rounded-l-md bg-kabul text-white placeholder-stone-300 focus:outline-none"
-    />
-    <button 
-      type="submit" 
-      title="Search"
-      class="bg-cloud hover:bg-opacity-90 text-kabul p-2 rounded-r-md flex items-center justify-center"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-         <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-      </svg>
-    </button>
-  </div>
-</nav>
-
+    <!-- Search Bar (mobile visible) -->
+    <div class="flex items-center space-x-2 mt-4 w-full">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery"
+        placeholder="Search..." 
+        class="flex-grow px-3 py-1.5 rounded-l-md bg-kabul text-white placeholder-stone-300 focus:outline-none"
+      />
+      <button 
+        type="submit" 
+        title="Search"
+        class="bg-cloud hover:bg-opacity-90 text-kabul p-2 rounded-r-md flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+           <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+      </button>
+    </div>
+  </nav>
 </header>
