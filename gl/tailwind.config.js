@@ -15,6 +15,13 @@ module.exports = {
       },
       fontSize: {
         'mega': '12.75rem' // you can name it anything
+      },
+        backgroundImage: {
+        'img': "url('/assets/img/bg2.jpg')",
+        // Add more as needed
+      },
+      inset: {
+        '16': '4rem',  // 16 * 0.25rem = 4rem
       }
     },
   },
