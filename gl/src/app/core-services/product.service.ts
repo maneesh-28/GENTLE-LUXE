@@ -36,5 +36,10 @@ export class ProductService {
     return this.http.delete(`${this.baseUrl}/${productId}`, { headers });
   }
 
+
+  // fetch all products to store
+  getAllProducts() {
+  return this.http.get<Product[]>('http://localhost:5000/api/products/all');
+}
 }
 

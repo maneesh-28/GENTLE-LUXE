@@ -48,4 +48,11 @@ export class MyProductsComponent implements OnInit{
       });
     }
   }
+
+  editProduct(productId: number): void {
+  // Navigate to edit page or open modal (you can customize this part)
+  console.log('Edit product ID:', productId);
+  alert(`You clicked Edit on Product ID ${productId}`);
+}
+
 }
