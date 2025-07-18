@@ -18,8 +18,9 @@ constructor(public router: Router) {}
   const hiddenRoutes = [
     '/auth/login',
     '/auth/register',
-    '/auth/adminlogin',
-    '/shared/404'
+    '/admin/login',
+    '/shared/404',
+     '/admin/dashboard',
   ];
 
   return !hiddenRoutes.includes(url);
@@ -31,12 +32,13 @@ constructor(public router: Router) {}
   const hiddenRoutes = [
     '/auth/login',
     '/auth/register',
-    '/auth/adminlogin',
+     '/admin/login',
     '/shared/404',
     '/pages/cart',
     '/pages/checkout',
     '/pages/my-orders',
-    '/pages/order-confirmation'
+    '/pages/order-confirmation',
+     '/admin/dashboard',
   ];
 
   const isProductDetails = url.startsWith('/pages/product-details/');

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../core-services/product.service';
 
 @Component({
   selector: 'app-summary',
@@ -6,6 +8,4 @@ import { Component } from '@angular/core';
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.css'
 })
-export class SummaryComponent {
-
-}
+export class SummaryComponent {}

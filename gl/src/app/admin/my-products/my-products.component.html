@@ -1,0 +1,11 @@
+<table>
+  <tr *ngFor="let product of uploadedProducts">
+    <td>{{ product.name }}</td>
+    <td>{{ product.price }}</td>
+    <td>
+      <button (click)="deleteProduct(product.id)">
+        🗑️
+      </button>
+    </td>
+  </tr>
+</table>

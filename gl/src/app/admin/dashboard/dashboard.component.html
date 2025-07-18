@@ -33,7 +33,7 @@
   </button>
 
   <!-- Sidebar -->
-  <aside
+  <!-- <aside
     [class.translate-x-0]="sidebarOpen"
     [class.-translate-x-full]="!sidebarOpen"
     class="fixed top-0 left-0 h-full w-64 bg-kabul text-cloud flex flex-col p-6 space-y-4 transform transition-transform duration-300 ease-in-out
@@ -47,6 +47,14 @@
         (click)="setTab('overview')"
       >
         Overview
+      </button>
+        <nav class="flex flex-col gap-2">
+      <button
+        class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+        [class.bg-shadow]="activeTab === 'myproduct'"
+        (click)="setTab('overview')"
+      >
+        My Product list
       </button>
       <button
         class="text-left px-4 py-2 rounded-md hover:bg-shadow"
@@ -77,12 +85,74 @@
         Recent Orders
       </button>
     </nav>
-  </aside>
+  </aside> -->
+
+  <!-- Sidebar -->
+<aside
+  [class.translate-x-0]="sidebarOpen"
+  [class.-translate-x-full]="!sidebarOpen"
+  class="fixed top-0 left-0 h-full w-64 bg-kabul text-cloud flex flex-col p-6 space-y-4 transform transition-transform duration-300 ease-in-out
+         md:translate-x-0 md:static md:flex"
+>
+  <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>
+  <nav class="flex flex-col gap-2">
+    <button
+      class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+      [class.bg-shadow]="activeTab === 'overview'"
+      (click)="setTab('overview')"
+    >
+      Overview
+    </button>
+    <button
+      class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+      [class.bg-shadow]="activeTab === 'myproduct'"
+      (click)="setTab('myproduct')"
+    >
+      My Product list
+    </button>
+    <button
+      class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+      [class.bg-shadow]="activeTab === 'summary'"
+      (click)="setTab('summary')"
+    >
+      Summary
+    </button>
+    <button
+      class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+      [class.bg-shadow]="activeTab === 'confirm-order'"
+      (click)="setTab('confirm-order')"
+    >
+      Confirm Orders
+    </button>
+    <button
+      class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+      [class.bg-shadow]="activeTab === 'addproduct'"
+      (click)="setTab('addproduct')"
+    >
+      Add Product
+    </button>
+    <button
+      class="text-left px-4 py-2 rounded-md hover:bg-shadow"
+      [class.bg-shadow]="activeTab === 'recent-orders'"
+      (click)="setTab('recent-orders')"
+    >
+      Recent Orders
+    </button>
+    <!-- logout -->
+     <button
+  class="text-left px-4 py-2 rounded-md hover:bg-red-500 hover:text-white"
+  (click)="logout()"
+>
+  Logout
+</button>
+  </nav>
+</aside>
 
   <!-- Main Content -->
   <main class="flex-1 p-6 overflow-y-auto bg-gray-50">
     <ng-container [ngSwitch]="activeTab">
       <app-overview *ngSwitchCase="'overview'"></app-overview>
+      <app-my-products *ngSwitchCase="'myproduct'"></app-my-products>
       <app-summary *ngSwitchCase="'summary'"></app-summary>
       <app-confirmorders *ngSwitchCase="'confirm-order'"></app-confirmorders>
       <app-addproduct *ngSwitchCase="'addproduct'"></app-addproduct>

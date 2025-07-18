@@ -17,4 +17,9 @@ export class DashboardComponent {
     this.sidebarOpen = false;
   }
 
+  logout() {
+  localStorage.removeItem('adminToken'); // Remove token
+  // You can also clear other admin-related data here if needed
+  window.location.href = '/admin/login'; // Redirect to admin login page
+}
 }

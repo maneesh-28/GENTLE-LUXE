@@ -8,7 +8,10 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 import { SummaryComponent } from './summary/summary.component';
 import { RecentordersComponent } from './recentorders/recentorders.component';
 import { ConfirmordersComponent } from './confirmorders/confirmorders.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MyProductsComponent } from './my-products/my-products.component';
 
 
 @NgModule({
@@ -18,12 +21,16 @@ import { FormsModule } from '@angular/forms';
     AddproductComponent,
     SummaryComponent,
     RecentordersComponent,
-    ConfirmordersComponent
+    ConfirmordersComponent,
+    LoginComponent,
+    MyProductsComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class AdminModule { }

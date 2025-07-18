@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductService } from '../../core-services/product.service';
 
 @Component({
   selector: 'app-addproduct',
@@ -9,18 +10,22 @@ import { Router } from '@angular/router';
   styleUrl: './addproduct.component.css'
 })
 export class AddproductComponent {
-  product = {
+ product: any = {
     name: '',
     description: '',
-    price: 0,
-    discount: 0,
-    stock: 0,
+    price: null,
+    discount: null,
+    stock: null,
     category: '',
-    sizes: [] as string[],
+    sizes: [],
     colors: '',
-    image: null as File | null,
     status: true
   };
+
+  selectedFile: File | null = null;
+
+  constructor(private addProductService: ProductService,
+    private router: Router) {}
 
   toggleSize(size: string) {
     const index = this.product.sizes.indexOf(size);
@@ -32,30 +37,33 @@ export class AddproductComponent {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.product.image = file;
-    }
+    this.selectedFile = event.target.files[0];
   }
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('name', this.product.name);
-    formData.append('description', this.product.description);
-    formData.append('price', this.product.price.toString());
-    formData.append('discount', this.product.discount.toString());
-    formData.append('stock', this.product.stock.toString());
-    formData.append('category', this.product.category);
-    formData.append('sizes', JSON.stringify(this.product.sizes));
-    formData.append('colors', this.product.colors);
-    formData.append('status', this.product.status ? 'active' : 'inactive');
 
-    if (this.product.image) {
-      formData.append('image', this.product.image);
+    for (const key in this.product) {
+      if (Array.isArray(this.product[key])) {
+        formData.append(key, JSON.stringify(this.product[key]));
+      } else {
+        formData.append(key, this.product[key]);
+      }
     }
 
-    // Implement backend service call here
-    console.log('Submitted product:', this.product);
-    alert('Product submitted (check console or implement API call)');
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.addProductService.addProduct(formData).subscribe({
+      next: () => {
+        alert('Product added successfully');
+        this.router.navigate(['/admin/products']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Error adding product');
+      }
+    });
   }
 }

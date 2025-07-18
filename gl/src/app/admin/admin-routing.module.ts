@@ -6,14 +6,19 @@ import { SummaryComponent } from './summary/summary.component';
 import { ConfirmordersComponent } from './confirmorders/confirmorders.component';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { RecentordersComponent } from './recentorders/recentorders.component';
+import { LoginComponent } from './login/login.component';
+import { AdminGuard } from '../guards/admin.guard';
+import { MyProductsComponent } from './my-products/my-products.component';
 
 const routes: Routes = [
-  {path: 'dashboard', component :DashboardComponent},
-  {path: 'overview', component :OverviewComponent},
-  {path: 'summary', component :SummaryComponent},
-  {path: 'confirm-order', component :ConfirmordersComponent},
-  {path: 'addproduct', component :AddproductComponent},
-  {path: 'recent-orders', component :RecentordersComponent},
+  {path: 'login', component :LoginComponent },
+  {path: 'dashboard', component :DashboardComponent, canActivate: [AdminGuard]},
+  {path: 'overview', component :OverviewComponent, canActivate: [AdminGuard]},
+  {path: 'summary', component :SummaryComponent, canActivate: [AdminGuard]},
+  {path: 'confirm-order', component :ConfirmordersComponent, canActivate: [AdminGuard]},
+  {path: 'addproduct', component :AddproductComponent, canActivate: [AdminGuard]},
+  {path: 'myproduct', component :MyProductsComponent, canActivate: [AdminGuard]},
+  {path: 'recent-orders', component :RecentordersComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({

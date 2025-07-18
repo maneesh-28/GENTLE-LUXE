@@ -9,8 +9,8 @@ const routes: Routes = [
   { path :'header', component : HeaderComponent},
   { path :'footer', component : FooterComponent},
   { path :'hero', component : HeroBannerComponent},
-  { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '404' },
+  // { path: '404', component: NotFoundComponent },
+  // { path: '**', redirectTo: '404' },
 
 ];
 

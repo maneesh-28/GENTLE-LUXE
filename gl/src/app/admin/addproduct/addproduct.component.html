@@ -1,7 +1,7 @@
 <div class="bg-white shadow rounded-xl p-6 max-w-3xl mx-auto" style="padding-top: 100px;">
   <h2 class="text-2xl font-semibold mb-6">Add New Product</h2>
   
-  <form #productForm="ngForm" class="space-y-6">
+  <form #productForm="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="space-y-6">
 
     <!-- Dress Name -->
     <div>
