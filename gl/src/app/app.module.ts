@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -17,10 +17,14 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     SharedModule,
     HttpClientModule,
+    ReactiveFormsModule
     // BrowserAnimationsModule,
     // ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    // provideAuth(() => getAuth()),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

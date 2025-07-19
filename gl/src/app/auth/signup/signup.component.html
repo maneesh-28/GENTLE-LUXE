@@ -1,0 +1,72 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+  class="max-w-md mx-auto p-6 mt-10 bg-white rounded-lg shadow-lg font-bicubik text-zeus space-y-6"
+>
+  <h3 class="text-2xl font-semibold mb-4 text-center">Create Account</h3>
+
+  <!-- Full Name -->
+  <input
+    type="text"
+    formControlName="name"
+    placeholder="Full Name"
+    class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+  />
+
+  <!-- Email -->
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="Email"
+    class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+  />
+
+  <!-- Phone Number -->
+  <input
+    type="tel"
+    formControlName="phone"
+    placeholder="Phone Number"
+    class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+  />
+
+  <!-- Password -->
+  <input
+    type="password"
+    formControlName="password"
+    placeholder="Password"
+    class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+  />
+
+  <!-- Confirm Password -->
+  <input
+    type="password"
+    formControlName="confirmPassword"
+    placeholder="Confirm Password"
+    class="w-full px-4 py-3 border border-cloud rounded-md placeholder-shadow focus:outline-none focus:ring-2 focus:ring-kabul transition"
+  />
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    [disabled]="registerForm.invalid"
+    class="w-full bg-kabul text-cloud py-3 rounded-md font-semibold hover:bg-shadow transition"
+  >
+    Sign Up
+  </button>
+
+  <!-- OR -->
+  <div class="text-center text-kabul font-semibold">OR</div>
+
+  <!-- Google Sign Up -->
+  <button
+    type="button"
+    class="w-full border border-kabul text-kabul py-3 rounded-md font-semibold hover:bg-cloud transition flex items-center justify-center gap-3"
+  >
+    <img
+      src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+      class="w-5 h-5"
+      alt="Google"
+    />
+    Sign up with Google
+  </button>
+</form>

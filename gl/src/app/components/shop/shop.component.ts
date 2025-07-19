@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../core-services/product.service';
 import { Product } from '../../models/product.model';
+import { CartService } from '../../core-services/cart.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -102,7 +105,11 @@ export class ShopComponent {
 
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private snackBar: MatSnackBar,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -175,7 +182,18 @@ export class ShopComponent {
     return filtered;
   }
 
+  // addToCart(product: Product): void {
+  //   alert(`Added "${product.name}" to cart.`);
+  // }
   addToCart(product: Product): void {
-    alert(`Added "${product.name}" to cart.`);
-  }
+  this.cartService.addToCart(product);
+
+  const snackBarRef = this.snackBar.open(`${product.name} added to cart`, 'Go to Cart', {
+    duration: 3000,
+  });
+
+  snackBarRef.onAction().subscribe(() => {
+    this.router.navigate(['/cart']);
+  });
+}
 }

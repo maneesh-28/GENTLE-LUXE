@@ -34,7 +34,7 @@ constructor(public router: Router) {}
     '/auth/register',
      '/admin/login',
     '/shared/404',
-    '/pages/cart',
+    '/cart',
     '/pages/checkout',
     '/pages/my-orders',
     '/pages/order-confirmation',
