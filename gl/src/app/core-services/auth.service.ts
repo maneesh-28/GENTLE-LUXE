@@ -43,6 +43,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
       tap((response: AuthResponse) => {
         localStorage.setItem(this.tokenKey, response.token);
+        localStorage.setItem('customerToken', response.token);
         this.authStatus.next(true);
       })
     );

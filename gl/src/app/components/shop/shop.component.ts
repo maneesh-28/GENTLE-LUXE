@@ -182,12 +182,33 @@ export class ShopComponent {
     return filtered;
   }
 
-  // addToCart(product: Product): void {
-  //   alert(`Added "${product.name}" to cart.`);
-  // }
-  addToCart(product: Product): void {
-  this.cartService.addToCart(product);
 
+  // addToCart(product: Product): void {
+  // this.cartService.addToCart(product);
+
+  // const snackBarRef = this.snackBar.open(`${product.name} added to cart`, 'Go to Cart', {
+  //   duration: 3000,
+  // });
+
+  // snackBarRef.onAction().subscribe(() => {
+  //   this.router.navigate(['/cart']);
+  // });
+// }
+
+
+// addToCart(product: Product): void {
+//   this.cartService.addToCart(product);
+//   const snackBarRef = this.snackBar.open(`${product.name} added to cart`, 'Go to Cart', {
+//     duration: 3000,
+//   });
+
+//   snackBarRef.onAction().subscribe(() => {
+//     this.router.navigate(['/cart']);
+//   });
+// }
+
+addToCart(product: Product): void {
+  this.cartService.addToCart(product);
   const snackBarRef = this.snackBar.open(`${product.name} added to cart`, 'Go to Cart', {
     duration: 3000,
   });

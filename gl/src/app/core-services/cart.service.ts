@@ -1,45 +1,96 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+export interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  img: string;
+  productId?: number; // optional, useful for backend matching
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  
+ private cartItems: CartItem[] = [];
+  private cartSubject = new BehaviorSubject<CartItem[]>([]);
 
-  private cartItems: Product[] = [];
-  private cartSubject = new BehaviorSubject<Product[]>([]);
+  private apiUrl = 'http://localhost:5000/api/cart';
 
-  cart$ = this.cartSubject.asObservable();
+  constructor(private http: HttpClient) {}
 
-  addToCart(product: Product) {
+  getCartItems(): Observable<CartItem[]> {
+    return this.cartSubject.asObservable();
+  }
+
+  addToCart(product: any): void {
     const existing = this.cartItems.find(p => p.id === product.id);
     if (existing) {
-      existing.quantity! += 1;
+      existing.quantity += 1;
     } else {
-      this.cartItems.push({ ...product, quantity: 1 });
+      const item: CartItem = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        img: product.imageUrl || product.img,
+      };
+      this.cartItems.push(item);
     }
+
     this.cartSubject.next(this.cartItems);
+    this.saveCartToDB();
   }
 
-  getCartItems(): Product[] {
-    return this.cartItems;
+  updateQuantity(productId: number, quantity: number): void {
+    const item = this.cartItems.find(p => p.id === productId);
+    if (item) item.quantity = quantity;
+    this.cartSubject.next(this.cartItems);
+    this.saveCartToDB();
   }
 
-  updateQuantity(productId: number, quantity: number) {
-    const product = this.cartItems.find(p => p.id === productId);
-    if (product) {
-      product.quantity = quantity;
-      this.cartSubject.next(this.cartItems);
-    }
-  }
-
-  removeProduct(productId: number) {
+  removeFromCart(productId: number): void {
     this.cartItems = this.cartItems.filter(p => p.id !== productId);
     this.cartSubject.next(this.cartItems);
+    this.saveCartToDB();
   }
 
-  getTotal(): number {
-    return this.cartItems.reduce((sum, p) => sum + p.price * (p.quantity || 1), 0);
+  saveCartToDB(): void {
+    const token = localStorage.getItem('customerToken');
+    if (!token) return;
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const payload = { items: this.cartItems };
+
+    this.http.post(`${this.apiUrl}/save`, payload, { headers }).subscribe({
+      next: res => console.log('Cart saved to DB', res),
+      error: err => console.error('Failed to save cart', err),
+    });
   }
+
+  loadCartFromDB(): void {
+    const token = localStorage.getItem('customerToken');
+    if (!token) return;
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.http.get<{ items: CartItem[] }>(this.apiUrl, { headers }).subscribe({
+      next: res => {
+        this.cartItems = res?.items || [];
+        this.cartSubject.next(this.cartItems);
+      },
+      error: err => console.error('Failed to load cart', err),
+    });
+  }
+
+  clearCart(): void {
+  this.cartItems = [];
+  this.cartSubject.next([]);
+}
+
 }

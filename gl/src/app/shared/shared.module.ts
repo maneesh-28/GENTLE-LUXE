@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HeaderComponent,
     FooterComponent,
     HeroBannerComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    HeroBannerComponent
+    HeroBannerComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule { }
