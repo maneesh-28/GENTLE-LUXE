@@ -65,13 +65,11 @@
     </div>
 
     <!-- Products Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       <div *ngFor="let product of filteredProducts()"
-        class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer flex flex-col">
-        <!-- <img [src]="product.imageUrl" alt="{{product.name}}" class="w-full aspect-[4/5] object-cover"> -->
-         <!-- <img [src]="'http://localhost:5000/uploads/' + product.imageUrl" alt="{{ product.name }}" /> -->
+        class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer flex flex-col"
+        [routerLink]="['/product-details', product.id]">
           <img [src]="'http://localhost:5000/uploads/products/' + product.imageUrl" alt="{{ product.name }}" class="w-full aspect-[4/5] object-cover"/>
-
         <div class="p-4 flex flex-col flex-grow">
           <h3 class="text-lg font-semibold mb-1 text-zeus">{{ product.name }}</h3>
           <p class="text-kabul text-sm mb-3 flex-grow">{{ product.description }}</p>
@@ -84,7 +82,39 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <!-- Products Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  <div *ngFor="let product of filteredProducts()"
+       class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition flex flex-col">
+
+    <img [src]="'http://localhost:5000/uploads/products/' + product.imageUrl"
+         alt="{{ product.name }}"
+         class="w-full aspect-[4/5] object-cover"/>
+
+    <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold mb-1 text-zeus">{{ product.name }}</h3>
+      <p class="text-kabul text-sm mb-3 flex-grow">{{ product.description }}</p>
+
+      <div class="flex justify-between items-center">
+        <span class="font-semibold text-zeus">₹{{ product.price }}</span>
+        
+        <!-- Buttons side-by-side -->
+        <div class="flex gap-2">
+          <button (click)="addToCart(product)"
+                  class="bg-zeus text-cloud px-3 py-1 rounded-lg text-sm hover:bg-shadow transition">
+            Add to Cart
+          </button>
+          <button (click)="viewProduct(product.id)"
+                  class="bg-shadow text-cloud px-3 py-1 rounded-lg text-sm hover:bg-zeus transition">
+            View
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
 
   </div>
 </div>
