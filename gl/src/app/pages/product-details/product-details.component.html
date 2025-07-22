@@ -8,7 +8,7 @@
       </div>
       <div class="flex gap-2 overflow-x-auto">
         <img *ngFor="let img of product.images" (click)="selectedImage = img"
-          [src]="img" alt="Thumbnail"
+          [src]="'http://localhost:5000/uploads/products/' + product.imageUrl" alt="Thumbnail"
           class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2"
           [class.border-zeus]="selectedImage === img" />
       </div>
@@ -62,7 +62,7 @@
 </div>
 
 <!-- Add to Cart Button -->
-<button (click)="addToCart()"
+<button (click)="addToCart(product)"
   class="w-full bg-zeus text-cloud py-3 rounded-xl text-lg hover:bg-shadow transition">
   Add to Cart
 </button>

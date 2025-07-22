@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerService } from '../../core-services/customer.service';
 
 
 @Component({
@@ -8,25 +9,47 @@ import { Router } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent {
-
+export class ProfileComponent implements OnInit{
   editMode = false;
   previewUrl: string | ArrayBuffer | null = null;
+  custId: string = '';
+  selectedFile: File | null = null;
 
   customer = {
-    fullName: 'John Doe',
-    email: 'john@example.com',
-    phone: '9876543210',
-    profilePicture: 'assets/images/default-profile.png',
-    address: '123 Gentle Street, Luxe City',
+    fullName: '',
+    email: '',
+    phone: '',
+    profilePicture: '',
+    address: '',
     password: ''
   };
 
-  constructor(private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private customerService: CustomerService
+  ) {}
 
-  onFileSelected(event: any) {
+  ngOnInit(): void {
+    this.custId = this.route.snapshot.paramMap.get('cust_id') || '';
+    this.fetchProfile(this.custId);
+  }
+
+  fetchProfile(id: string) {
+    this.customerService.getCustomerById(id).subscribe(
+      (res) => {
+        this.customer = res;
+      },
+      (err) => {
+        console.error('Failed to fetch profile:', err);
+      }
+    );
+  }
+
+   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
+      this.selectedFile = file;
       const reader = new FileReader();
       reader.onload = () => {
         this.previewUrl = reader.result;
@@ -37,14 +60,29 @@ export class ProfileComponent {
   }
 
   saveProfile() {
-    this.editMode = false;
-    console.log('Saved profile:', this.customer);
-    // Call API to update profile if connected to backend
+    const formData = new FormData();
+    formData.append('fullName', this.customer.fullName);
+    formData.append('phone', this.customer.phone);
+    formData.append('address', this.customer.address);
+    if (this.customer.password) formData.append('password', this.customer.password);
+    if (this.selectedFile) formData.append('profilePicture', this.selectedFile);
+
+    this.customerService.updateCustomer(this.custId, formData).subscribe(
+      (res) => {
+        this.editMode = false;
+        alert('Profile updated successfully!');
+      },
+      (err) => {
+        console.error('Failed to update profile:', err);
+      }
+    );
   }
 
-  logout() {
-    // Clear token or session and redirect
+
+   logout() {
+    // Clear localStorage/session
     this.router.navigate(['/auth/login']);
   }
+
 
 }

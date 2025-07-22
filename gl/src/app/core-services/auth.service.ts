@@ -20,7 +20,21 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   // Customer Registration
-  registerCustomer(data: {
+  // registerCustomer(data: {
+  //   name: string;
+  //   email: string;
+  //   phone: string;
+  //   password: string;
+  //   confirmPassword?: string;
+  // }): Observable<AuthResponse> {
+  //   return this.http.post<AuthResponse>(`${this.baseUrl}/register`, data).pipe(
+  //     tap((response: AuthResponse) => {
+  //       localStorage.setItem(this.tokenKey, response.token);
+  //       this.authStatus.next(true);
+  //     })
+  //   );
+  // }
+   registerCustomer(data: {
     name: string;
     email: string;
     phone: string;
@@ -30,24 +44,45 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, data).pipe(
       tap((response: AuthResponse) => {
         localStorage.setItem(this.tokenKey, response.token);
+
+        const decoded = this.parseJwt(response.token);
+        if (decoded && decoded.id) {
+          localStorage.setItem('customerId', decoded.id);
+        }
+
         this.authStatus.next(true);
       })
     );
   }
 
   // Customer Login
-  loginCustomer(credentials: {
-    email: string;
-    password: string;
-  }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
-      tap((response: AuthResponse) => {
-        localStorage.setItem(this.tokenKey, response.token);
-        localStorage.setItem('customerToken', response.token);
-        this.authStatus.next(true);
-      })
-    );
-  }
+  // loginCustomer(credentials: {
+  //   email: string;
+  //   password: string;
+  // }): Observable<AuthResponse> {
+  //   return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
+  //     tap((response: AuthResponse) => {
+  //       localStorage.setItem(this.tokenKey, response.token);
+  //       localStorage.setItem('customerToken', response.token);
+  //       this.authStatus.next(true);
+  //     })
+  //   );
+  // }
+  loginCustomer(credentials: { email: string; password: string }): Observable<AuthResponse> {
+  return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
+    tap((response: AuthResponse) => {
+      localStorage.setItem(this.tokenKey, response.token);
+
+      const decoded = this.parseJwt(response.token);
+      if (decoded && decoded.id) {
+        localStorage.setItem('customerId', decoded.id); // ✅ Save customerId
+      }
+
+      this.authStatus.next(true);
+    })
+  );
+}
+
 
   // Logout Customer
   logout() {
@@ -69,5 +104,20 @@ export class AuthService {
   // Check token in localStorage
   private hasToken(): boolean {
     return !!localStorage.getItem(this.tokenKey);
+  }
+
+   // 🔐 Decode JWT token payload
+  private parseJwt(token: string): any {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join(''));
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.error('Error decoding JWT:', e);
+      return null;
+    }
   }
 }

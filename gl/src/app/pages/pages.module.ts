@@ -17,7 +17,7 @@ import { MyOrderComponent } from './my-order/my-order.component';
     CartComponent,
     CheckoutComponent,
     OrderConfirmationComponent,
-    MyOrderComponent
+    MyOrderComponent,
   ],
   imports: [
     CommonModule,

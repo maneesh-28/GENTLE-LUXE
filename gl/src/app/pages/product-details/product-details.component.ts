@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../core-services/product.service';
+import { CartService } from '../../core-services/cart.service';
+import { Product } from '../../models/product.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-details',
@@ -9,42 +12,7 @@ import { ProductService } from '../../core-services/product.service';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit{
-
-//  product = {
-//     title: 'Elegant Satin Dress',
-//     price: 3499,
-//     description: 'A luxurious satin midi dress, perfect for elegant occasions.',
-//     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-//     colors: ['#28221E', '#614E41', '#7F6951'],
-//     images: ['img1.jpg', 'img2.jpg', 'img3.jpg'],
-//     care: 'Dry clean only',
-//     material: '100% Satin',
-//     returnPolicy: '10-day return with original tags',
-//   };
-
-//   selectedImage = this.product.images[0];
-//   selectedSize = '';
-//   selectedColor = '';
-//   quantity = 1;
-
-//   decreaseQuantity() {
-//     this.quantity = Math.max(1, this.quantity - 1);
-//   }
-
-//   increaseQuantity() {
-//     this.quantity++;
-//   }
-
-//   addToCart() {
-//     console.log('Add to cart:', {
-//       product: this.product.title,
-//       selectedSize: this.selectedSize,
-//       selectedColor: this.selectedColor,
-//       quantity: this.quantity,
-//     });
-//     alert('Added to cart!');
-//   }
- product: any;
+  product: any;
   selectedImage: string = '';
   selectedSize: string = '';
   selectedColor: string = '';
@@ -52,23 +20,12 @@ export class ProductDetailsComponent implements OnInit{
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
-  // ngOnInit() {
-  //   const productId = this.route.snapshot.paramMap.get('id');
-  //   if (productId) {
-  //     this.productService.getProductById(productId).subscribe({
-  //       next: (res) => {
-  //         this.product = res;
-  //         this.selectedImage = this.product.images?.[0] || '';
-  //       },
-  //       error: (err) => {
-  //         console.error('Error fetching product:', err);
-  //       }
-  //     });
-  //   }
-  // }
   ngOnInit(): void {
   const id = this.route.snapshot.paramMap.get('id');
   if (id) {
@@ -88,14 +45,26 @@ export class ProductDetailsComponent implements OnInit{
     this.quantity++;
   }
 
-  addToCart() {
-    console.log('Add to cart:', {
-      product: this.product.title,
-      selectedSize: this.selectedSize,
-      selectedColor: this.selectedColor,
-      quantity: this.quantity,
+  // addToCart() {
+  //   console.log('Add to cart:', {
+  //     product: this.product.title,
+  //     selectedSize: this.selectedSize,
+  //     selectedColor: this.selectedColor,
+  //     quantity: this.quantity,
+  //   });
+  //   alert('Added to cart!');
+  // }
+
+  addToCart(product: Product): void {
+    this.cartService.addToCart(product);
+    const snackBarRef = this.snackBar.open(`${product.name} added to cart`, 'Go to Cart', {
+      duration: 3000,
     });
-    alert('Added to cart!');
+  
+    snackBarRef.onAction().subscribe(() => {
+      this.router.navigate(['/cart']);
+    });
   }
+  
 
 }
