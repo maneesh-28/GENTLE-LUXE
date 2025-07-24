@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../../core-services/customer.service';
+import { AuthService } from '../../core-services/auth.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class ProfileComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -79,10 +81,9 @@ export class ProfileComponent implements OnInit{
   }
 
 
-   logout() {
-    // Clear localStorage/session
-    this.router.navigate(['/auth/login']);
-  }
 
+  logout(): void {
+  this.authService.logout(); // Calls the service method
+}
 
 }

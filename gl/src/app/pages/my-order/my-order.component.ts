@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CheckoutService } from '../../core-services/checkout.service';
 
 @Component({
   selector: 'app-my-order',
@@ -6,44 +7,43 @@ import { Component } from '@angular/core';
   templateUrl: './my-order.component.html',
   styleUrl: './my-order.component.css'
 })
-export class MyOrderComponent {
+export class MyOrderComponent implements OnInit{
+  orders: any[] = [];
+  loading = false;
+  error = '';
+  customerName = '';
 
-  orders = [
-    {
-      id: 'GLX-001',
-      date: new Date('2025-05-20'),
-      status: 'Delivered',
-      products: [
-        { name: 'Luxury Handbag', price: 150, quantity: 1 },
-        { name: 'Silk Scarf', price: 40, quantity: 2 }
-      ]
-    },
-    {
-      id: 'GLX-002',
-      date: new Date('2025-05-26'),
-      status: 'Confirmed',
-      products: [
-        { name: 'Leather Wallet', price: 60, quantity: 1 }
-      ]
-    },
-    {
-      id: 'GLX-003',
-      date: new Date('2025-05-28'),
-      status: 'Pending',
-      products: [
-        { name: 'Perfume Set', price: 120, quantity: 1 },
-        { name: 'Gift Box', price: 25, quantity: 1 }
-      ]
-    }
-  ];
+  constructor(private checkoutService: CheckoutService) {}
+
+  ngOnInit(): void {
+    this.fetchOrders();
+  }
+
+  fetchOrders(): void {
+    this.loading = true;
+
+    this.checkoutService.getMyOrders().subscribe({
+      next: (res) => {
+        this.orders = res.orders || [];
+        this.customerName = res.orders?.[0]?.customerName || 'Customer';
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Failed to fetch orders:', err);
+        this.error = 'Unable to fetch your orders.';
+        this.loading = false;
+      }
+    });
+  }
 
   getOrderTotal(order: any): number {
-    return order.products.reduce((total: number, p: any) => total + p.price * p.quantity, 0);
+    return order.items.reduce((total: number, item: any) => {
+      return total + item.price * item.quantity;
+    }, 0);
   }
 
-  viewOrder(orderId: string) {
-    alert(`Viewing order ${orderId}`);
-    // Or navigate: this.router.navigate(['/order-details', orderId])
+  viewOrder(orderId: number): void {
+    console.log('Viewing order ID:', orderId);
+    // Future: this.router.navigate(['/order-details', orderId]);
   }
-
 }

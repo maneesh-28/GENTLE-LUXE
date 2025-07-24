@@ -85,11 +85,21 @@ export class AuthService {
 
 
   // Logout Customer
-  logout() {
-    localStorage.removeItem(this.tokenKey);
-    this.authStatus.next(false);
-    this.router.navigate(['/customer/login']); // change route as needed
-  }
+  logout(): void {
+  // Remove the stored token
+  localStorage.removeItem(this.tokenKey); // e.g., 'customerToken' or 'authToken'
+
+  // Optional: Remove other customer-related data
+  localStorage.removeItem('customerId');
+  localStorage.removeItem('customerName');
+
+  // Notify other parts of app that user is logged out
+  this.authStatus.next(false);
+
+  // Redirect to login page
+  this.router.navigate(['/auth/login']);
+}
+
 
   // Observable login state
   isLoggedIn() {

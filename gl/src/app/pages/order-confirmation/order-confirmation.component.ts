@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-confirmation',
@@ -7,19 +8,23 @@ import { Component } from '@angular/core';
   styleUrl: './order-confirmation.component.css'
 })
 export class OrderConfirmationComponent {
+  orderId: string;
+  customer: any;
+  products: any[];
+  estimatedDeliveryDate: Date = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000);
 
-    orderId = 'GLX-20250529-001';
-  customer = {
-    name: 'John Doe',
-    email: 'john@example.com'
-  };
+  constructor(private router: Router) {
+    const nav = this.router.getCurrentNavigation();
+    const state = nav?.extras?.state as {
+      orderId: string;
+      customer: any;
+      products: any[];
+    };
 
-  estimatedDeliveryDate = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000); // 5 days from now
-
-  products = [
-    { name: 'Luxury Handbag', price: 150, quantity: 1 },
-    { name: 'Premium Wallet', price: 50, quantity: 2 }
-  ];
+    this.orderId = state?.orderId || 'N/A';
+    this.customer = state?.customer || { name: 'Guest', email: '' };
+    this.products = state?.products || [];
+  }
 
   getTotalPrice() {
     return this.products.reduce((total, p) => total + p.price * p.quantity, 0);
@@ -28,5 +33,4 @@ export class OrderConfirmationComponent {
   trackOrder() {
     alert('Tracking feature coming soon!');
   }
-
 }

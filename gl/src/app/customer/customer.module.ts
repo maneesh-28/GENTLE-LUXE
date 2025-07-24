@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

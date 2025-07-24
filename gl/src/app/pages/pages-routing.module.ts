@@ -12,8 +12,10 @@ const routes: Routes = [
   { path :'checkout', component : CheckoutComponent, canActivate: [AuthGuard]},
   // { path :'product-details', component : ProductDetailsComponent, canActivate: [AuthGuard]},
   { path :'order-confirmation', component : OrderConfirmationComponent, canActivate: [AuthGuard] },
-  { path :'my-orders', component : MyOrderComponent, canActivate: [AuthGuard] },
+  // { path :'my-orders', component : MyOrderComponent, canActivate: [AuthGuard] },
   { path: 'productdetails/:id',  component: ProductDetailsComponent},
+  { path: 'myorders/:cust_id', component: MyOrderComponent, canActivate: [AuthGuard]
+}
 ];
 
 @NgModule({

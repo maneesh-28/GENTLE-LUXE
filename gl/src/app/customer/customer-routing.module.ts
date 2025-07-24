@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { MyOrderComponent } from '../pages/my-order/my-order.component';
 
 const routes: Routes = [
   // {path: 'profile' , component: ProfileComponent, canActivate: [AuthGuard]}
@@ -10,7 +11,8 @@ const routes: Routes = [
   path: 'profile/:cust_id',
   component: ProfileComponent,
   canActivate: [AuthGuard]
-}
+},
+
 
 ];
 

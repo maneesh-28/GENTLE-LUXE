@@ -28,8 +28,8 @@
 
     <!-- Navigation (desktop only) -->
     <nav class="hidden md:flex items-center space-x-6 uppercase text-sm font-medium">
-      <a routerLink="/home" class="hover:text-cloud">Home</a>
-      <a routerLink="/shop" class="hover:text-cloud">Shop</a>
+      <a (click)="goToHome()"  class="hover:text-cloud cursor-pointer">Home</a>
+      <a (click)="goToShop()"  class="hover:text-cloud cursor-pointer">Shop</a>
     </nav>
 
     <!-- Profile / Cart (desktop only) -->
